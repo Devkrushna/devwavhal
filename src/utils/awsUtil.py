@@ -3,8 +3,8 @@ from vaultUtil import VaultClient
 # from vaultUtil import vault_client
 
 VAULT_URL = "http://127.0.0.1:8200"
-ROLE_ID = "6a07171f-9cb4-de30-6872-ee3078d70586"
-SECRET_ID = "21f814dd-6004-3eb7-9fb7-a97f4025bdb3"
+ROLE_ID = "924c15a0-ca85-7739-39fe-cdf5faaece9a"
+SECRET_ID = "3127782a-4916-51f2-ae9a-df4f7e8d4828"
 SECRET_PATH = "secret/data/aws"
 
 vault_client = VaultClient(VAULT_URL, ROLE_ID, SECRET_ID, SECRET_PATH)
