@@ -6,7 +6,7 @@ import sys
 # print("After Append:", sys.path)
 from vaultUtil import VaultClient
 from awsUtil import AWSConnector
-# from snowUtil import SnowflakeConnector
+from snowUtil import SnowflakeConnector
 
 VAULT_URL = "http://127.0.0.1:8200"
 ROLE_ID = "924c15a0-ca85-7739-39fe-cdf5faaece9a"
@@ -45,48 +45,48 @@ print("IAM groups:", response)
 
 
 
-# # Replace these with your Snowflake account details
-# account = 'ipuefez-gvb05659.snowflakecomputing.com/console/login'
+# Replace these with your Snowflake account details
+account = 'ipuefez-gvb05659'
 
-# SECRET_PATH = "secret/data/snow"
+SECRET_PATH = "secret/data/snow"
 
-# vault_client = VaultClient(VAULT_URL, ROLE_ID, SECRET_ID, SECRET_PATH)
-# token = vault_client.authenticate_with_approle()
+vault_client = VaultClient(VAULT_URL, ROLE_ID, SECRET_ID, SECRET_PATH)
+token = vault_client.authenticate_with_approle()
 
-# if token:
-#     secret_data = vault_client.get_secret(token)
-#     if secret_data:
-#         print("Secret data:", secret_data)
-#     else:
-#         print("Failed to retrieve secret.")
-# else:
-#     print("Failed to authenticate with AppRole.")
-
-
-# user = secret_data['data']['bw-snow-serviceusername-dev']
-# password = secret_data['data']['bw-snow-serviceuserpassword-dev']
+if token:
+    secret_data = vault_client.get_secret(token)
+    if secret_data:
+        print("Secret data:", secret_data)
+    else:
+        print("Failed to retrieve secret.")
+else:
+    print("Failed to authenticate with AppRole.")
 
 
-# # user = 'RMAHAJAN'
-# # password = 'Brainworks@2023'
+user = secret_data['data']['bw-snow-serviceusername-dev']
+password = secret_data['data']['bw-snow-serviceuserpassword-dev']
+
+
+# user = 'RMAHAJAN'
+# password = 'Brainworks@2023'
 
 
 
-# warehouse = 'COMPUTE_WH'
-# database = 'SNOWFLAKE_SAMPLE_DATA'
-# schema = 'TPCH_SF1'
+warehouse = 'COMPUTE_WH'
+database = 'SNOWFLAKE_SAMPLE_DATA'
+schema = 'TPCH_SF1'
 
-# # Create an instance of SnowflakeConnector
-# snowflake_conn = SnowflakeConnector(account, user, password, warehouse, database, schema)
+# Create an instance of SnowflakeConnector
+snowflake_conn = SnowflakeConnector(account, user, password, warehouse, database, schema)
 
-# # Connect to Snowflake
-# snowflake_conn.connect()
+# Connect to Snowflake
+snowflake_conn.connect()
 
-# # Execute a query
-# query_result = snowflake_conn.execute_query("SELECT * from SUPPLIER")
+# Execute a query
+query_result = snowflake_conn.execute_query("SELECT * from SUPPLIER limit 5")
 
-# # Print the result
-# print("Current Date in Snowflake:", query_result[0][0])
+# Print the result
+print("Current Date in Snowflake:", query_result)
 
-# # Close the connection
-# snowflake_conn.close_connection()
+# Close the connection
+snowflake_conn.close_connection()
