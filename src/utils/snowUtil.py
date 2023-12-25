@@ -64,8 +64,8 @@ snowflake_conn.connect()
 query_result = snowflake_conn.execute_query("SELECT * from SUPPLIER limit 5")
 
 # Print the result
-print("Current Date in Snowflake:", query_result[0][0])
-# print("Current Date in Snowflake:", query_result)
+# print("Current Date in Snowflake:", query_result[0][0])
+print("Current Date in Snowflake:", query_result)
 
 
 # Close the connection
